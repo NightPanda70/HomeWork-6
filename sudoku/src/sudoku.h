@@ -72,7 +72,7 @@ public:
 
     bool operator ==(const int (*otherGrid)[9]) {
         for (int i=0; i<9*9; i++) {
-            if (grid[i%3][i/3] != otherGrid[i%3][i/3]) {
+            if (grid[i%9][i/9] != otherGrid[i%9][i/9]) {
                 return false;
             }
         }
@@ -80,7 +80,15 @@ public:
     }
 
     bool operator ==(const Sudoku & other) {
-        memcpy(this->grid, other.grid, 9 * 9 * sizeof(int));
+        for (int i=0; i<9*9; i++) {
+#ifdef PRINT
+            printf("comparing grid(%d, %d)\n", i%9, i/9);
+#endif
+            if (grid[i%9][i/9] != other.grid[i%9][i/9]) {
+                return false;
+            }
+        }
+        return true;
     }
 
     int get(int i, int j) {
