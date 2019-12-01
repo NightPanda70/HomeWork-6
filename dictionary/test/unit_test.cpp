@@ -72,93 +72,115 @@ TEST(dict, array_dict_add_get) {
 
 TEST(dict, contains) {
     // homework
-	// homework
-	ArrayDictionary<int, int> hashTable;//make new tables for each set 
+
+	//_____SET ONE_____
+	//make new tables for set
+	ArrayDictionary<int, int> hashTable;
 	ASSERT_FALSE(hashTable.contain(-1));
 	ASSERT_FALSE(hashTable.contain(0));
 	ASSERT_FALSE(hashTable.contain(1));
 
-	//set two
+  	//_____SET TWO_____
+	//make new tables for key
 	ArrayDictionary<int, int> hashTableTwo(1);
-	ASSERT_TRUE(hashTableTwo.add(0,103));
+	ASSERT_TRUE(hashTableTwo.add(0, 103));
+
+	//test if it contains a key
 	ASSERT_FALSE(hashTableTwo.contain(2));
 	ASSERT_TRUE(hashTableTwo.contain(0));
+
+	//should print one line
 #ifdef PRINT
 	hashTableTwo.print();
 #endif
-	//set three
+
+	//_____SET THREE_____
+	//make new tables for set
 	ArrayDictionary<int, int> hashTableThree(2);
 	ASSERT_TRUE(hashTableThree.add(0, 103));
 	ASSERT_TRUE(hashTableThree.add(1, 105));
-	//return
+
+	//test if it contains the key
 	ASSERT_TRUE(hashTableThree.contain(0));
 	ASSERT_TRUE(hashTableThree.contain(1));
 	ASSERT_FALSE(hashTableThree.contain(2));
 	ASSERT_FALSE(hashTableThree.contain(3));
 
-	//set four
+	//_____SET FOUR_____
+	//make new tables for set
 	ArrayDictionary<int, int> hashTableFour(3);
 	ASSERT_TRUE(hashTableFour.add(0, 103));
 	ASSERT_TRUE(hashTableFour.add(1, 105));
 	ASSERT_TRUE(hashTableFour.add(2, 206));
+
+	//test if it contains the key
 	ASSERT_FALSE(hashTableFour.contain(3));
 	ASSERT_TRUE(hashTableFour.contain(1));
 
-	//set Five
+	//_____SET FIVE_____
+	//make new tables for set
 	ArrayDictionary<int, int> hashTableFive(3);
 	ASSERT_TRUE(hashTableFive.add(0, 103));
 	ASSERT_TRUE(hashTableFive.add(1, 105));
 	ASSERT_TRUE(hashTableFive.add(2, 206));
 	ASSERT_TRUE(hashTableFive.add(4, 407));
+
+	//test if it contains the key
 	ASSERT_TRUE(hashTableFive.contain(1));
 	ASSERT_TRUE(hashTableFive.contain(4));
 	ASSERT_FALSE(hashTableFive.contain(7));
-	ASSERT_FALSE(hashTableFive.contain(8));
-}
+	ASSERT_FALSE(hashTableFive.contain(8));}
 
 TEST(dict, remove) {
     // homework
-
-	//case One
+	//_____CASE ONE_____
 	//test empty dictionary
-	ArrayDictionary<int, int> hashTable_One;
+	ArrayDictionary<int, int> hashTable_One(1);
 	ASSERT_FALSE(hashTable_One.remove(2));
 
-	//set Two
+	//_____CASE TWO_____
 	//key exists in a dictionary that has no collision
-	ArrayDictionary<int ,int> hashTable_Two;
+	ArrayDictionary<int ,int> hashTable_Two(4);
 	ASSERT_TRUE(hashTable_Two.add(1, 1));
 	ASSERT_TRUE(hashTable_Two.add(2, 2));
 	ASSERT_TRUE(hashTable_Two.add(3, 3));
 	ASSERT_TRUE(hashTable_Two.add(4, 4));
+
+	//remove key
 	ASSERT_TRUE(hashTable_Two.remove(2));
 
-	//set Three
+	//_____CASE THREE_____
 	//key does not exists in a dictionary that has no collision
-	ArrayDictionary<int, int> hashTable_Three;
+	ArrayDictionary<int, int> hashTable_Three(4);
 	ASSERT_TRUE(hashTable_Three.add(1, 1));
 	ASSERT_TRUE(hashTable_Three.add(2, 2));
 	ASSERT_TRUE(hashTable_Three.add(3, 3));
 	ASSERT_TRUE(hashTable_Three.add(4, 4));
-	ASSERT_FALSE(hashTable_Three.remove(5)); // placeholder
 
-	//set four
+	//remove key
+	ASSERT_FALSE(hashTable_Three.remove(5)); 
+
+	//_____CASE FOUR_____
 	//key exists in a dictionary that has collision, key is in the collision.
-	ArrayDictionary<int, int> hashTable_Four;
+	ArrayDictionary<int, int> hashTable_Four(4);//specify the size
 	ASSERT_TRUE(hashTable_Four.add(1, 1));
 	ASSERT_TRUE(hashTable_Four.add(2, 2));
 	ASSERT_TRUE(hashTable_Four.add(2, 3));
 	ASSERT_TRUE(hashTable_Four.add(3, 3));
 	ASSERT_TRUE(hashTable_Four.add(4, 4));
+
+	//remove key
 	ASSERT_TRUE(hashTable_Four.remove(3));
 
-	//set Five
+	//_____CASE FIVE_____
 	//key does not exists in a dictionary that has collision
-	ArrayDictionary<int, int> hashTable_Five;
+	ArrayDictionary<int, int> hashTable_Five(4);
 	ASSERT_TRUE(hashTable_Five.add(1, 1));
 	ASSERT_TRUE(hashTable_Five.add(2, 2));
 	ASSERT_TRUE(hashTable_Four.add(2, 3));
 	ASSERT_TRUE(hashTable_Five.add(3, 3));
 	ASSERT_TRUE(hashTable_Five.add(4, 4));
+
+	//remove key
 	ASSERT_FALSE(hashTable_Five.remove(5));
 }

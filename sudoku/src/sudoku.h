@@ -5,48 +5,47 @@ class Sudoku {
 private:
     int grid[9][9]{};
 
- bool _solve(int x, int y) {
+  //recursive function that solves Sudoku
+    bool _solve(int x, int y) {
         bool result = false;
-        //if fird is not equal to zero
+        //find a cell that is empty and test possible nums
         if (grid[y][x] == 0) {// y = row x = col
-            //to finish, not done
-            for (int i = 1; i <= 9; i++) {
+            for (int i = 1; i <= 9; i++) {//test all pos input
                 if(num_That_Work(x,y,i)){
                     grid[y][x] = i;
                     if (y + 1 == 9 && x + 1 == 9) {
                         return true;
-                    }
+                    }//end inner if
                     else if (x + 1 == 9 && y < 8) {
                         result = _solve(0, y + 1);
                         if (result != true) {
                             grid[y][x] = 0;
-                        }
+                        }//end inner if
                         else {
                             return result;
-                        }
+                        }//end else
                     }//end else if
-                    else {
                         result = _solve(x + 1, y);
                         if (result != true) {
                             grid[y][x] = 0;
-                        }
+                        }//end inner if
                         else {
                             return result;
-                        }
-                    }
-                }
-            }
+                        }//end if
+                }//end if
+            }//end for
             return result;
         }//end if
+        //move to the next cell
         if (y + 1 == 9 && x + 1 == 9) {
             return true;
-        }
+        }//end if
         else if (x + 1 == 9 && y < 8) {
             return _solve(0, y + 1);
         }//end else if
         else {
             return _solve(x + 1, y);
-        }
+        }//end else
     }//end _solve
 
     //test if number work
@@ -112,6 +111,6 @@ public:
 
     bool solve() {
         // homework
-        return _solve(0,0);   // placeholder
+        return _solve(0,0);//call _solve returns tree when done
     }
 };
