@@ -137,7 +137,9 @@ TEST(dict, remove) {
 	//test empty dictionary
 	ArrayDictionary<int, int> hashTable_One(1);
 	ASSERT_FALSE(hashTable_One.remove(2));
-
+#ifdef PRINT
+	hashTable_One.print();
+#endif
 	//_____CASE TWO_____
 	//key exists in a dictionary that has no collision
 	ArrayDictionary<int ,int> hashTable_Two(4);
@@ -145,10 +147,14 @@ TEST(dict, remove) {
 	ASSERT_TRUE(hashTable_Two.add(2, 2));
 	ASSERT_TRUE(hashTable_Two.add(3, 3));
 	ASSERT_TRUE(hashTable_Two.add(4, 4));
-
+#ifdef PRINT
+	hashTable_Two.print();
+#endif
 	//remove key
 	ASSERT_TRUE(hashTable_Two.remove(2));
-
+#ifdef PRINT
+	hashTable_Two.print();
+#endif
 	//_____CASE THREE_____
 	//key does not exists in a dictionary that has no collision
 	ArrayDictionary<int, int> hashTable_Three(4);
@@ -165,19 +171,23 @@ TEST(dict, remove) {
 	ArrayDictionary<int, int> hashTable_Four(4);//specify the size
 	ASSERT_TRUE(hashTable_Four.add(1, 1));
 	ASSERT_TRUE(hashTable_Four.add(2, 2));
-	ASSERT_TRUE(hashTable_Four.add(2, 3));
+	ASSERT_TRUE(hashTable_Four.add(6, 3));
 	ASSERT_TRUE(hashTable_Four.add(3, 3));
 	ASSERT_TRUE(hashTable_Four.add(4, 4));
-
+#ifdef PRINT
+	hashTable_Four.print();
+#endif
 	//remove key
-	ASSERT_TRUE(hashTable_Four.remove(3));
-
+	ASSERT_TRUE(hashTable_Four.remove(2));
+#ifdef PRINT
+	hashTable_Four.print();
+#endif
 	//_____CASE FIVE_____
 	//key does not exists in a dictionary that has collision
 	ArrayDictionary<int, int> hashTable_Five(4);
 	ASSERT_TRUE(hashTable_Five.add(1, 1));
 	ASSERT_TRUE(hashTable_Five.add(2, 2));
-	ASSERT_TRUE(hashTable_Four.add(2, 3));
+	ASSERT_TRUE(hashTable_Five.add(6, 3));
 	ASSERT_TRUE(hashTable_Five.add(3, 3));
 	ASSERT_TRUE(hashTable_Five.add(4, 4));
 
