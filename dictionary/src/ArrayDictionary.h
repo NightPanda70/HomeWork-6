@@ -124,14 +124,15 @@ public:
 
     bool contain(KeyType const &key) override {
         // homework
-			if (key < 0) {
-			KeyType pos;
-			pos = key * -1;
-			return contain(pos);
-		}//end if
+	if (key < 0) {//see if key is negetive
+		KeyType pos;
+		pos = key * -1;
+		return contain(pos);//enter positive key
+	}//end if
+	
        	int hashedKey = hashFunc(key);//get index
 	Entry<KeyType, ValueType>* ptr = entries[hashedKey];
-	while (ptr != nullptr) {
+	while (ptr != nullptr) {//find the key
 		if (ptr->key == key) {
 			return true;
 		}//end if
@@ -147,27 +148,27 @@ public:
     bool remove(KeyType const &key) override {
         // homework
         int hashyKey = hashFunc(key);
-		bool testFirst = contain(key);
+	bool testFirst = contain(key);
 		if (testFirst) {
 			count--;//make sure fun-size changes
-            //check for the key after the first element
-            //and delete key if found
+           		//check for the key after the first element
+            		//and delete key if found
 			Entry<KeyType, ValueType>* ptr = entries[hashyKey];
-            Entry<KeyType, ValueType>* temp = ptr->next;
+            		Entry<KeyType, ValueType>* temp = ptr->next;
 			while (ptr != nullptr && temp != nullptr) {
 				if (temp->key == key) { 
 					ptr->next = temp->next;
 					delete temp;
-				}//end if
+				}//end inner if
 			ptr = ptr->next;//move next
 			}//end while while
 
-            //find the first key and delete it if found
+            		//find the first key and delete it if found
 			Entry<KeyType, ValueType>* ptrTwo = entries[hashyKey];
 			if (ptrTwo->key == key) {
 				entries[hashyKey] = ptrTwo->next;
 				delete ptrTwo;
-			}//end if
+			}//end inner if
 		}//end if
 		return testFirst;
 	}   
